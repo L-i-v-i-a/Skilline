@@ -7,11 +7,11 @@ const Hero = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <section className="relative pt-16 pb-32 md:pt-20 lg:pt-28 lg:pb-52 overflow-hidden bg-[#FFF2E1]">
+    <section className="relative pt-8 pb-32 md:pt-20 lg:pt-16 lg:pb-52 overflow-hidden bg-[#FFF2E1]">
       <div className="w-full px-4 md:px-10 lg:px-16 flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-0">
         
-        {/* Left Content - Now sits lower without negative margin */}
-        <div className="w-full lg:w-[45%] z-30 text-center lg:text-left">
+        {/* Left Content - Center aligned on mobile, left on desktop */}
+        <div className="w-full lg:w-[45%] z-30 text-center lg:text-left lg:mt-[-40px]">
           <h1 className="text-[36px] sm:text-[44px] md:text-[60px] xl:text-[70px] font-black leading-[1.1] tracking-tight">
             <span className="text-[#F48C06]">Studying</span> <span className="text-[#2F327D]">Online is now much easier</span>
           </h1>
@@ -19,7 +19,7 @@ const Hero = () => {
             Skillline is an interesting platform that will teach you in a more interactive way.
           </p>
           
-          <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-6 md:gap-10 mt-8 md:mt-12">
+          <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-6 md:gap-10 mt-8 md:mt-10">
             <button className="w-full sm:w-auto bg-[#F48C06] text-white px-10 py-4 md:py-5 rounded-full font-bold text-lg shadow-xl shadow-orange-100 hover:brightness-105 transition-all active:scale-95">
               Join for free
             </button>
@@ -35,14 +35,14 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Right Content: Student & Floating Glass Cards (Lowered positions) */}
-        <div className="w-full lg:w-[55%] relative flex justify-center lg:justify-end">
+        {/* Right Content: Student & Floating Glass Cards */}
+        <div className="w-full lg:w-[55%] relative flex justify-center lg:justify-end lg:mt-[-20px]">
           <div className="relative w-full max-w-[320px] sm:max-w-[450px] md:max-w-[550px] lg:max-w-[680px]">
             {/* Main Image */}
             <img src={studentImg} alt="Student" className="w-full relative z-10 scale-105" />
 
-            {/* Glass Card: 250k - Shifted down to top-[25%] */}
-            <div className="absolute top-[25%] -left-4 sm:-left-8 md:-left-16 bg-white/40 backdrop-blur-md p-2 md:p-4 rounded-xl md:rounded-2xl shadow-xl flex items-center gap-2 md:gap-4 z-20 border border-white/30 animate-bounce-slow">
+            {/* Glass Card: 250k - Responsive Scaling */}
+            <div className="absolute top-[20%] -left-4 sm:-left-8 md:-left-16 bg-white/40 backdrop-blur-md p-2 md:p-4 rounded-xl md:rounded-2xl shadow-xl flex items-center gap-2 md:gap-4 z-20 border border-white/30 animate-bounce-slow">
               <div className="bg-[#23BDEE] p-1.5 md:p-2 rounded-lg text-white">
                 <svg className="w-4 h-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
               </div>
@@ -52,8 +52,8 @@ const Hero = () => {
               </div>
             </div>
 
-            {/* Glass Card: Congratulations - Shifted down to top-[48%] */}
-            <div className="absolute top-[48%] -right-4 sm:-right-6 md:-right-10 bg-white/40 backdrop-blur-md p-2 md:py-4 md:px-5 rounded-xl md:rounded-2xl shadow-xl flex items-center gap-2 md:gap-4 z-20 border border-white/30 animate-bounce-slow delay-700">
+            {/* Glass Card: Congratulations */}
+            <div className="absolute top-[40%] -right-4 sm:-right-6 md:-right-10 bg-white/40 backdrop-blur-md p-2 md:py-4 md:px-5 rounded-xl md:rounded-2xl shadow-xl flex items-center gap-2 md:gap-4 z-20 border border-white/30 animate-bounce-slow delay-700">
               <div className="bg-[#F48C06] p-1.5 md:p-2.5 rounded-lg text-white">
                 <svg className="w-4 h-4 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" /><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" /></svg>
               </div>
@@ -64,8 +64,8 @@ const Hero = () => {
               <div className="absolute right-2 md:right-4 bg-[#33EFA0] w-4 h-4 md:w-6 md:h-6 rounded-full flex items-center justify-center text-white text-[8px] md:text-[10px]">✓</div>
             </div>
 
-            {/* Glass Card: User Experience - Kept at bottom */}
-            <div className="absolute bottom-[2%] left-[2%] sm:left-[5%] bg-white/40 backdrop-blur-lg p-3 md:p-6 rounded-[20px] md:rounded-[35px] shadow-2xl w-[180px] sm:w-[240px] md:w-80 z-20 border border-white/40 animate-bounce-slow delay-300">
+            {/* Glass Card: User Experience */}
+            <div className="absolute bottom-[5%] left-[2%] sm:left-[5%] bg-white/40 backdrop-blur-lg p-3 md:p-6 rounded-[20px] md:rounded-[35px] shadow-2xl w-[180px] sm:w-[240px] md:w-80 z-20 border border-white/40 animate-bounce-slow delay-300">
               <div className="flex items-center gap-2 md:gap-4 mb-3 md:mb-6">
                 <div className="relative">
                   <img src={avatarImg} className="w-8 h-8 md:w-14 md:h-14 rounded-full border-2 border-white object-cover" alt="Instructor" />
@@ -81,8 +81,8 @@ const Hero = () => {
               </button>
             </div>
 
-            {/* Graph Icon: Shifted down to top-[28%] away from headband */}
-            <div className="absolute top-[28%] right-[10%] bg-[#F06292] p-2 md:p-3 rounded-lg md:rounded-xl shadow-lg z-20 flex flex-col items-center justify-center gap-0.5 md:gap-1 animate-pulse">
+            {/* Graph Icon */}
+            <div className="absolute top-[22%] right-[8%] bg-[#F06292] p-2 md:p-3 rounded-lg md:rounded-xl shadow-lg z-20 flex flex-col items-center justify-center gap-0.5 md:gap-1 animate-pulse">
                <div className="flex items-end gap-0.5 md:gap-1 h-4 md:h-6 px-0.5 md:px-1">
                   <div className="w-0.5 md:w-1 bg-white/40 h-1 md:h-2 rounded-t-sm"></div>
                   <div className="w-0.5 md:w-1 bg-white h-3 md:h-4 rounded-t-sm"></div>
