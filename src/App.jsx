@@ -3,6 +3,7 @@ import Navbar from './components/Navbar'
 import Login from './pages/Login'
 import Home from './pages/Home'
 import RegisterCard from './pages/RegisterCard'
+import StudentRegister from './pages/StudentRegister'
 function App() {
   return (
     <>
@@ -14,6 +15,9 @@ function App() {
         </Routes>
         <Routes>
           <Route path="/register-page" element={<RegisterCard />} />
+        </Routes>
+        <Routes>
+          <Route path="/student-reg" element={<StudentRegister />} />
         </Routes>
     </>
   )

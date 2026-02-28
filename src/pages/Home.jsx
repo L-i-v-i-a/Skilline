@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
 import WhatIsSkilline from '../components/WhatIsSkilline'
 import PhysicalClassroom from '../components/PhysicalClassroom'
+import Features from '../components/Features'
 
 const Home = () => {
   return (
@@ -24,6 +25,7 @@ const Home = () => {
       </section>
       <WhatIsSkilline />
       <PhysicalClassroom />
+      <Features />
     </div>   
   )
 }
