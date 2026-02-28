@@ -4,6 +4,7 @@ import Hero from '../components/Hero'
 import WhatIsSkilline from '../components/WhatIsSkilline'
 import PhysicalClassroom from '../components/PhysicalClassroom'
 import Features from '../components/Features'
+import TeacherToolsSection from '../components/TeacherToolsSection'
 
 const Home = () => {
   return (
@@ -26,6 +27,7 @@ const Home = () => {
       <WhatIsSkilline />
       <PhysicalClassroom />
       <Features />
+      <TeacherToolsSection />
     </div>   
   )
 }
