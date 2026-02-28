@@ -14,6 +14,7 @@ const StudentRegister = () => {
     phone_number: '',
     matric_number: '', // required
     major: '',
+    role: 'student', // Default role set here
   });
 
   const [files, setFiles] = useState({
@@ -37,7 +38,7 @@ const StudentRegister = () => {
 
     const data = new FormData();
     
-    // Append text fields
+    // Append text fields (this now includes 'role': 'student')
     Object.keys(formData).forEach((key) => {
       data.append(key, formData[key]);
     });
@@ -57,20 +58,21 @@ const StudentRegister = () => {
       let result;
       try {
         result = JSON.parse(responseText);
-      } catch {
-        // Non-JSON response (e.g. 404 HTML page) — log and show simple alert
-        console.error("Server returned non-JSON response:", responseText.substring(0, 300));
-        alert("Server error or wrong endpoint. Check console for details.");
-        return;
-      }
-
+      } catch (err) {
+      // Using 'err' here tells ESLint the variable is necessary
+      console.error("Registration Network Error:", err); 
+      alert("A network error occurred. Please try again.");
+    } finally {
+      setLoading(false);
+    }
       if (response.status === 201) {
         console.log("Success:", result);
         alert(result.message || "Account created! Check your email for OTP.");
         navigate('/verify-otp', { state: { email: result.email } });
       } else {
         console.error("Registration failed:", result);
-        alert("Registration failed. Please check your details.");
+        // Specifically check for role or other field errors
+        alert(result.detail || "Registration failed. Please check your details.");
       }
     } catch (err) {
       console.error("Network / Fetch Error:", err);
@@ -132,7 +134,6 @@ const StudentRegister = () => {
             </div>
           </div>
 
-          {/* Submit Action */}
           <button 
             type="submit" 
             disabled={loading}
