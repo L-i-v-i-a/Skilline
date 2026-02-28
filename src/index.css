@@ -1,1 +1,24 @@
-@import "tailwindcss"
+@import "tailwindcss";
+
+@theme {
+  /* Custom Colors from Design */
+  --color-skill-orange: #F48C06;
+  --color-skill-blue: #2F327D;
+  --color-skill-pink: #D8587E;
+  --color-skill-bg: #FFF2E1;
+  --color-skill-cyan: #24D1EC;
+  
+  /* Custom Animation */
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-skill-bg antialiased text-skill-blue;
+  }
+}
