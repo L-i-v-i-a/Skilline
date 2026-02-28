@@ -2,7 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Login from './pages/Login'
 import Home from './pages/Home'
-
+import RegisterCard from './pages/RegisterCard'
 function App() {
   return (
     <>
