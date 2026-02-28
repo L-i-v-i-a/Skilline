@@ -4,8 +4,7 @@ import Hero from '../components/Hero'
 import WhatIsSkilline from '../components/WhatIsSkilline'
 import PhysicalClassroom from '../components/PhysicalClassroom'
 import Features from '../components/Features'
-import TeacherToolsSection from '../components/TeacherToolsSection'
-import SkillSection from '../components/SkillSection'
+import SkillSection from '../components/SkillSection/SkillSection'
 
 const Home = () => {
   return (
@@ -25,6 +24,7 @@ const Home = () => {
           <span className="text-3xl font-bold">FACEBOOK</span>
         </div>
       </section>
+      <SkillSection />
       <WhatIsSkilline />
       <PhysicalClassroom />
       <Features />
