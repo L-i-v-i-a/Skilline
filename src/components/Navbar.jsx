@@ -26,7 +26,7 @@ const Navbar = () => {
               className="h-10 w-10 md:h-11 md:w-11 object-contain" 
             />
             <span className="absolute left-2.5 md:left-3 text-2xl md:text-3xl font-bold text-skill-blue tracking-tighter whitespace-nowrap">
-              Skillline
+              Skilline
             </span>
           </div>
         </div>

@@ -16,7 +16,7 @@ const Hero = () => {
             <span className="text-[#F48C06]">Studying</span> <span className="text-[#2F327D]">Online is now much easier</span>
           </h1>
           <p className="text-[#696984] mt-4 md:mt-6 text-lg md:text-2xl mx-auto lg:mx-0 max-w-lg leading-snug font-medium">
-            Skillline is an interesting platform that will teach you in a more interactive way.
+            Skilline is an interesting platform that will teach you in a more interactive way.
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-6 md:gap-10 mt-8 md:mt-10">
