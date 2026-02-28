@@ -12,6 +12,9 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
         </Routes>
+        <Routes>
+          <Route path="/register-page" element={<RegisterCard />} />
+        </Routes>
     </>
   )
 }
