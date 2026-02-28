@@ -1,13 +1,10 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
-<<<<<<< HEAD
-import SkillSection from '../components/SkillSection'
-=======
 import WhatIsSkilline from '../components/WhatIsSkilline'
 import PhysicalClassroom from '../components/PhysicalClassroom'
 import Features from '../components/Features'
->>>>>>> origin/dev
+import SkillSection from '../components/SkillSection/SkillSection'
 
 const Home = () => {
   return (
@@ -27,6 +24,7 @@ const Home = () => {
           <span className="text-3xl font-bold">FACEBOOK</span>
         </div>
       </section>
+      <SkillSection />
       <WhatIsSkilline />
       <PhysicalClassroom />
       <Features />
