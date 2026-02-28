@@ -1,8 +1,14 @@
-function App() {
+import { Routes, Route, Navigate } from 'react-router-dom'
+import Navbar from './components/Navbar'
+import Login from './pages/Login'
 
+function App() {
   return (
     <>
-      <h1 className='bg-red-300'>Vite + React</h1>
+    <Navbar />
+        <Routes>
+          <Route path="/login" element={<Login />} />
+        </Routes>
     </>
   )
 }
