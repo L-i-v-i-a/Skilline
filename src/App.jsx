@@ -1,11 +1,14 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Login from './pages/Login'
+import Home from './pages/Home'
 
 function App() {
   return (
     <>
-    <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
         <Routes>
           <Route path="/login" element={<Login />} />
         </Routes>
