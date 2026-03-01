@@ -6,6 +6,7 @@ import RegisterCard from './pages/RegisterCard'
 import StudentRegister from './pages/StudentRegister'
 import InstructorRegister from './pages/InstructorRegister'
 import VerifyOtp from './pages/VerifyOtp'
+import Blog from './pages/Blog'
 function App() {
   return (
     <>

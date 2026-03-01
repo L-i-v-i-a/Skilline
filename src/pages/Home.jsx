@@ -5,6 +5,7 @@ import WhatIsSkilline from '../components/WhatIsSkilline'
 import PhysicalClassroom from '../components/PhysicalClassroom'
 import Features from '../components/Features'
 import SkillSection from '../components/SkillSection/SkillSection'
+import Blog from './Blog'
 
 const Home = () => {
   return (
