@@ -15,6 +15,7 @@ import StudentResults from './pages/StudentResults';
 import StudentNotification from './pages/StudentNoification';
 import StudentProfile from './pages/StudentProfile';
 import StudentOverview from './pages/tudentOverview';
+import InstructorDashboardLayout from './components/InstructorDashboardLayout';
 import MyCourses from './pages/MyCourses';
 import SubmitAssignment from './pages/SubmitAssignment';  
 
@@ -40,6 +41,15 @@ function App() {
         <Route path="results" element={<StudentResults />} />
         <Route path="notifications" element={<StudentNotification />} />
         <Route path="profile" element={<StudentProfile />} />
+      </Route>
+
+      {/* Instructor Portal */}
+      <Route path="/instructor" element={<InstructorDashboardLayout />}>
+        <Route path="dashboard" element={<div>Instructor Overview Stats</div>} />
+        <Route path="courses" element={<InstructorCourses />} />
+        <Route path="courses/create" element={<CreateCourse />} />
+        <Route path="submissions" element={<div>Grading Area</div>} />
+        <Route index element={<Navigate to="/instructor/dashboard" replace />} />
       </Route>
     </Routes>
   );
