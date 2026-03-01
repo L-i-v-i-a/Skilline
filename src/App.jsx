@@ -1,4 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import React from 'react';
 import { Outlet } from 'react-router-dom'; // We will use this in the Layout fix
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -16,9 +18,21 @@ import StudentNotification from './pages/StudentNoification';
 import StudentProfile from './pages/StudentProfile';
 import StudentOverview from './pages/tudentOverview';
 import InstructorDashboardLayout from './components/InstructorDashboardLayout';
+import InstructorCourses from './pages/InstructorCourses';
+import CreateCourse from './pages/CreateCourse';
+import InstructorSubmissions from './pages/InstructorSubmissions';
+import InstructorProfile from './pages/InstructorProfile';
+import InstructorOverview from './pages/InstructorOverview';
 import MyCourses from './pages/MyCourses';
 import SubmitAssignment from './pages/SubmitAssignment';  
 
+const Navigate = ({ to, replace }) => {
+  const navigate = useNavigate();
+  React.useEffect(() => {
+    navigate(to, { replace });
+  }, [to, replace, navigate]);
+  return null;
+}
 function App() {
   return (
     <Routes>
@@ -45,12 +59,17 @@ function App() {
 
       {/* Instructor Portal */}
       <Route path="/instructor" element={<InstructorDashboardLayout />}>
-        <Route path="dashboard" element={<div>Instructor Overview Stats</div>} />
-        <Route path="courses" element={<InstructorCourses />} />
-        <Route path="courses/create" element={<CreateCourse />} />
-        <Route path="submissions" element={<div>Grading Area</div>} />
-        <Route index element={<Navigate to="/instructor/dashboard" replace />} />
-      </Route>
+  
+      {/* 2. THESE PATHS ARE RELATIVE (Notice no starting slash) */}
+      <Route path="dashboard" element={<InstructorOverview />} />
+      <Route path="courses" element={<InstructorCourses />} />
+      <Route path="courses/create" element={<CreateCourse />} />
+      <Route path="submissions" element={<InstructorSubmissions />} />
+      <Route path="profile" element={<InstructorProfile />} />
+  
+      {/* 3. DEFAULT REDIRECT */}
+      <Route index element={<Navigate to="/instructor/dashboard" replace />} />
+</Route>
     </Routes>
   );
 }

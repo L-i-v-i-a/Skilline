@@ -13,7 +13,7 @@ export default function InstructorCourses() {
   const fetchCourses = async () => {
     try {
       const token = localStorage.getItem('accessToken');
-      const res = await axios.get(`${API_BASE}/student/instructor/courses/`, {
+      const res = await axios.get(`${API_BASE}/student/courses/`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setCourses(res.data.results || []);
