@@ -10,7 +10,7 @@ const Footer = () => {
           {/* Using your logo-shape.png asset */}
           <div className="relative w-14 h-14 flex items-center justify-center">
             <img 
-              src="/assets/logo-shape.png" 
+              src="../assets/logo-shape.png" 
               alt="Logo Shape" 
               className="absolute inset-0 w-full h-full object-contain"
             />

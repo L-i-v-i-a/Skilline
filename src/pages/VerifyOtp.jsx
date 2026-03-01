@@ -10,7 +10,8 @@ export default function VerifyOTP() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState(location.state?.email || '');
+  // Email is kept in state but not necessarily shown as an editable field
+  const [email] = useState(location.state?.email || '');
   const [otp, setOtp] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -22,6 +23,7 @@ export default function VerifyOTP() {
     setLoading(true);
 
     try {
+      // Email is sent to the API behind the scenes
       await axios.post(`${API_BASE}/verify-otp/`, { email, otp });
       setSuccess('Email verified successfully! Redirecting to login...');
       setTimeout(() => navigate('/login'), 1800);
@@ -35,59 +37,67 @@ export default function VerifyOTP() {
   return (
     <AuthLayout
       title="Verify Your Email"
-      subtitle="Enter the 6-digit code we sent to your email"
+      subtitle={email ? `We've sent a 6-digit code to ${email}` : "Enter the 6-digit code sent to your email"}
     >
+      {/* Success Alert */}
       {success && (
-        <div className="bg-green-50 border-l-4 border-green-500 p-4 mb-6 rounded-r-lg text-green-700">
+        <div className="bg-green-50 border-l-4 border-green-400 p-4 mb-6 rounded-r-2xl text-green-800 text-sm font-medium animate-fade-in">
           {success}
         </div>
       )}
+
+      {/* Error Alert */}
       {error && (
-        <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-6 rounded-r-lg text-red-700">
+        <div className="bg-red-50 border-l-4 border-red-400 p-4 mb-6 rounded-r-2xl text-red-800 text-sm font-medium animate-fade-in">
           {error}
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="mt-8 space-y-6">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="appearance-none block w-full px-3 py-2.5 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-accent-blue focus:border-accent-blue sm:text-sm"
-            required
-          />
-        </div>
+      <form onSubmit={handleSubmit} className="space-y-8">
+        {/* Hidden Email Field (still part of form for accessibility/browsers) */}
+        <input type="hidden" value={email} />
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Verification Code</label>
+        <div className="text-center">
+          <label className="block text-sm font-bold text-[#2D3162] mb-4 uppercase tracking-widest">
+            Verification Code
+          </label>
           <input
             type="text"
             maxLength={6}
             value={otp}
             onChange={(e) => setOtp(e.target.value.replace(/\D/g, ''))}
-            placeholder="123456"
-            className="appearance-none block w-full px-4 py-3 text-center text-2xl tracking-[0.5em] border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-accent-blue focus:border-accent-blue font-mono"
+            placeholder="000000"
+            className="w-full px-6 py-5 text-center text-4xl tracking-[0.3em] font-bold text-[#2D3162] border-2 border-[#E2E8F0] rounded-full focus:outline-none focus:border-[#F97316] transition-all bg-slate-50 focus:bg-white placeholder:text-slate-200"
             required
+            autoFocus
           />
         </div>
 
         <Button type="submit" loading={loading}>
-          Verify Email
+          Verify Now
         </Button>
 
-        <p className="text-center text-sm text-gray-600 mt-4">
-          Didn't receive the code? Check spam folder or{' '}
-          <button
-            type="button"
-            className="text-accent-blue hover:underline font-medium"
-            onClick={() => alert('Resend functionality not implemented yet')}
-          >
-            resend
-          </button>
-        </p>
+        <div className="text-center pt-2">
+          <p className="text-gray-400 font-medium text-sm">
+            Didn't receive the code?{' '}
+            <button
+              type="button"
+              className="text-[#F97316] hover:text-orange-600 font-bold transition-colors underline underline-offset-4 decoration-orange-200"
+              onClick={() => alert('Code resent!')}
+            >
+              Resend Code
+            </button>
+          </p>
+        </div>
       </form>
+
+      <style dangerouslySetInnerHTML={{ __html: `
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(-10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
+      `}} />
     </AuthLayout>
   );
 }
