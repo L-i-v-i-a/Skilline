@@ -6,6 +6,8 @@ import RegisterCard from './pages/RegisterCard'
 import StudentRegister from './pages/StudentRegister'
 import InstructorRegister from './pages/InstructorRegister'
 import VerifyOtp from './pages/VerifyOtp'
+import ForgotPassword from './pages/ForgotPassword'
+import ResetPassword from './pages/ResetPassword'
 function App() {
   return (
     <>
@@ -26,6 +28,12 @@ function App() {
         </Routes>
         <Routes>
           <Route path="/reg-instructor" element={<InstructorRegister />} />
+        </Routes>
+        <Routes>
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+        </Routes>
+        <Routes>
+          <Route path="/reset-password" element={<ResetPassword />} />
         </Routes>
     </>
   )
