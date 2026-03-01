@@ -21,7 +21,7 @@ export default function MyCourses() {
         
         // For this demo, we assume the API returns courses the student is active in.
         setEnrolledCourses(res.data.results);
-      } catch (err) {
+      } catch{
         setError('Could not load your courses.');
       } finally {
         setLoading(false);
