@@ -1,42 +1,48 @@
-import { Routes, Route, Navigate } from 'react-router-dom'
-import Navbar from './components/Navbar'
-import Login from './pages/Login'
-import Home from './pages/Home'
-import RegisterCard from './pages/RegisterCard'
-import StudentRegister from './pages/StudentRegister'
-import InstructorRegister from './pages/InstructorRegister'
-import VerifyOtp from './pages/VerifyOtp'
-import ForgotPassword from './pages/ForgotPassword'
-import ResetPassword from './pages/ResetPassword'
+import { Routes, Route } from 'react-router-dom';
+import { Outlet } from 'react-router-dom'; // We will use this in the Layout fix
+import Home from './pages/Home';
+import Login from './pages/Login';
+import RegisterCard from './pages/RegisterCard';
+import StudentRegister from './pages/StudentRegister';
+import InstructorRegister from './pages/InstructorRegister';
+import VerifyOtp from './pages/VerifyOtp';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
+import StudentDashboardLayout from './pages/StudentDashboardLayout';
+import StudentCourses from './pages/StudentCourses';
+import CourseDetails from './pages/CourseDetails';
+import StudentResults from './pages/StudentResults';
+import StudentNotification from './pages/StudentNoification';
+import StudentProfile from './pages/StudentProfile';
+import StudentOverview from './pages/tudentOverview';
+import MyCourses from './pages/MyCourses';
+import SubmitAssignment from './pages/SubmitAssignment';  
+
 function App() {
   return (
-    <>
-        <Routes>
-          <Route path="/" element={<Home />} />
-        </Routes>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-        </Routes>
-        <Routes>
-          <Route path="/register-page" element={<RegisterCard />} />
-        </Routes>
-        <Routes>
-          <Route path="/reg-student" element={<StudentRegister />} />
-        </Routes>
-        <Routes>
-          <Route path="/verify-otp" element={<VerifyOtp />} />
-        </Routes>
-        <Routes>
-          <Route path="/reg-instructor" element={<InstructorRegister />} />
-        </Routes>
-        <Routes>
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-        </Routes>
-        <Routes>
-          <Route path="/reset-password" element={<ResetPassword />} />
-        </Routes>
-    </>
-  )
+    <Routes>
+      {/* Public Routes */}
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register-page" element={<RegisterCard />} />
+      <Route path="/reg-student" element={<StudentRegister />} />
+      <Route path="/verify-otp" element={<VerifyOtp />} />
+      <Route path="/reg-instructor" element={<InstructorRegister />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
+
+      {/* Nested Student Routes */}
+      {/* The Layout wraps all these paths */}
+      <Route path="/student" element={<StudentDashboardLayout />}>
+        <Route path="dashboard" element={<StudentOverview />} /> {/* Create a simple Overview component */}
+        <Route path="courses" element={<StudentCourses />} />
+        <Route path="assignments" element={<CourseDetails />} />
+        <Route path="results" element={<StudentResults />} />
+        <Route path="notifications" element={<StudentNotification />} />
+        <Route path="profile" element={<StudentProfile />} />
+      </Route>
+    </Routes>
+  );
 }
 
-export default App
+export default App;

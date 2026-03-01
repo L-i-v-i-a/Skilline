@@ -34,7 +34,7 @@ export default function Login() {
 
       // Optional: decode token to get role and redirect accordingly
       // For simplicity we just go to dashboard/home
-      navigate('/dashboard'); // ← change to your protected route
+      navigate('/student/dashboard'); // ← change to your protected route
 
     } catch (err) {
       const errMsg = err.response?.data?.detail || 'Login failed. Please check your credentials.';
