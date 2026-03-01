@@ -19,7 +19,7 @@ export default function SubmitAssignment() {
   useEffect(() => {
     const fetchDetails = async () => {
       try {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('accessToken');
         // We use the results or specific assignment endpoint if available
         const res = await axios.get(`${API_BASE}/students/results/`, {
           headers: { Authorization: `Bearer ${token}` }
@@ -55,7 +55,7 @@ export default function SubmitAssignment() {
     formData.append('file', file);
 
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('accessToken');
       await axios.post(`${API_BASE}/students/assignments/${id}/submit/`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,

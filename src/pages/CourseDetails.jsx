@@ -14,7 +14,7 @@ export default function CourseDetails() {
   useEffect(() => {
     const fetchCourseData = async () => {
       try {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('accessToken');
         const headers = { Authorization: `Bearer ${token}` };
 
         const [courseRes, assignRes] = await Promise.all([

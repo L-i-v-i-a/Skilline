@@ -12,7 +12,7 @@ export default function MyCourses() {
   useEffect(() => {
     const fetchEnrolledCourses = async () => {
       try {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('accessToken');
         // Note: Depending on backend logic, you might use a specific 
         // /api/students/my-enrollments/ endpoint or filter the list
         const res = await axios.get(`${API_BASE}/students/courses/`, {

@@ -10,7 +10,7 @@ export default function StudentNotifications() {
 
   const fetchNotifications = async () => {
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('accessToken');
       const res = await axios.get(`${API_BASE}/students/notifications/`, {
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -28,7 +28,7 @@ export default function StudentNotifications() {
 
   const markAsRead = async (id) => {
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('accessToken');
       await axios.patch(`${API_BASE}/students/notifications/${id}/read/`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });

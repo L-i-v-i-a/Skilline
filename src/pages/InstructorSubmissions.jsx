@@ -14,7 +14,7 @@ export default function InstructorSubmissions() {
       const token = localStorage.getItem('accessToken');
       // Note: You can fetch submissions per assignment or a general list
       // For this example, we'll fetch the instructor's general submission queue
-      const res = await axios.get(`${API_BASE}/student/instructor/submissions/`, {
+      const res = await axios.get(`${API_BASE}/students/instructor/submissions/`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setSubmissions(res.data.results || []);
@@ -30,7 +30,7 @@ export default function InstructorSubmissions() {
   const handleGradeSubmit = async (submissionId) => {
     try {
       const token = localStorage.getItem('accessToken');
-      await axios.patch(`${API_BASE}/student/instructor/submissions/${submissionId}/grade/`, 
+      await axios.patch(`${API_BASE}/students/instructor/submissions/${submissionId}/grade/`, 
         { 
           grade: parseInt(gradeData.grade), 
           feedback: gradeData.feedback 

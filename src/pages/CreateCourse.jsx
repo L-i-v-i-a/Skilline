@@ -23,7 +23,7 @@ export default function CreateCourse() {
 
     try {
       const token = localStorage.getItem('accessToken');
-      await axios.post(`${API_BASE}/student/instructor/courses/create/`, data, {
+      await axios.post(`${API_BASE}/students/instructor/courses/create/`, data, {
         headers: { 
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data' 

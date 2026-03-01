@@ -13,7 +13,7 @@ export default function InstructorCourses() {
   const fetchCourses = async () => {
     try {
       const token = localStorage.getItem('accessToken');
-      const res = await axios.get(`${API_BASE}/student/courses/`, {
+      const res = await axios.get(`${API_BASE}/students/instructor/courses/`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setCourses(res.data.results || []);
@@ -30,7 +30,7 @@ export default function InstructorCourses() {
     e.preventDefault();
     try {
       const token = localStorage.getItem('accessToken');
-      await axios.post(`${API_BASE}/student/instructor/courses/${showAssignModal}/assignments/create/`, 
+      await axios.post(`${API_BASE}/students/instructor/courses/${showAssignModal}/assignments/create/`, 
         assignData, 
         { headers: { Authorization: `Bearer ${token}` } }
       );

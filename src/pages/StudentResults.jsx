@@ -11,7 +11,7 @@ export default function StudentResults() {
   useEffect(() => {
     const fetchResults = async () => {
       try {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem('accessToken');
         const res = await axios.get(`${API_BASE}/students/results/`, {
           headers: { Authorization: `Bearer ${token}` }
         });
