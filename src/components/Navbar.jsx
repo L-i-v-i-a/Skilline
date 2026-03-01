@@ -82,7 +82,7 @@ const Navbar = () => {
         <div className="flex flex-col items-center justify-center h-full px-8 gap-8 text-2xl font-bold text-[#2F327D]">
           <a href="#" onClick={() => setIsOpen(false)}>Home</a>
           <a href="#" onClick={() => setIsOpen(false)}>Careers</a>
-          <a href="#" onClick={() => setIsOpen(false)}>Blog</a>
+          <a href="/blog" onClick={() => setIsOpen(false)}>Blog</a>
           <a href="#" onClick={() => setIsOpen(false)}>About Us</a>
           <div className="flex flex-col w-full max-w-xs gap-4 mt-4">
             <Link to="/login" onClick={() => setIsOpen(false)}>

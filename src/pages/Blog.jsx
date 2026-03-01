@@ -1,13 +1,34 @@
-import React from 'react'
-import Navbar from '../components/Navbar'
+import React from "react";
 import { motion } from "framer-motion";
 import { Calendar, ArrowRight } from "lucide-react";
 
 const Blog = () => {
+  // Blog Data
+  const posts = [
+    {
+      title: "How Digital Learning is Transforming Education",
+      description:
+        "Discover how modern cloud-based tools are reshaping classrooms and improving collaboration between students and instructors.",
+      date: "March 10, 2026",
+      image: "https://images.unsplash.com/photo-1584697964190-7383c1b6b9e9",
+    },
+    {
+      title: "Top 5 Tools Every Student Portal Should Have",
+      description:
+        "Explore essential features that make a student portal powerful, user-friendly, and efficient for academic success.",
+      date: "March 15, 2026",
+      image: "https://images.unsplash.com/photo-1573164713988-8665fc963095",
+    },
+    {
+      title: "Why Cloud Software is the Future of Schools",
+      description:
+        "Learn why institutions are moving to cloud-based systems to enhance productivity, security, and accessibility.",
+      date: "March 20, 2026",
+      image: "https://images.unsplash.com/photo-1551434678-e076c223a692",
+    },
+  ];
+
   return (
-    <>
-      <Navbar />
-      
     <section className="py-24 px-6 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto">
         {/* ================= HEADER ================= */}
@@ -77,10 +98,7 @@ const Blog = () => {
         </div>
       </div>
     </section>
-
-      <footer />
-    </>
   );
-} 
+};
 
-export default Blog
+export default Blog;
