@@ -1,16 +1,84 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+#  Skilline: Advanced Learning Management System
 
-Currently, two official plugins are available:
+**Skilline** is a premium, full-stack LMS designed to bridge the gap between instructors and students through a modern, responsive, and highly interactive interface. Built with **React** and **Tailwind CSS**, it features a robust authentication system and dedicated portals for different user roles.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Key Modules
 
-## React Compiler
+### 1. Authentication System
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Custom-designed onboarding experience with a focus on security and UX.
 
-## Expanding the ESLint configuration
+* **Persistent Auth**: Uses `localStorage` for `accessToken` and `refreshToken`.
+* **Role-Based Access**: Logic-driven routing that directs users to either the **Student** or **Instructor** dashboard upon login.
+* **Modern UI**: Glassmorphic input fields, animated transitions, and real-time validation.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 2. Student Learning Portal
+
+A distraction-free environment for students to consume content.
+
+* **Course Discovery**: Browse available curriculum with formatted pricing (e.g., **₦150,000**).
+* **Assignment Hub**: View specific tasks per course with clear deadlines and max scores.
+* **Submission Tracking**: Dynamic views to see pending and completed tasks.
+
+### 3.  Instructor Management Dashboard
+
+A powerful command center for educators to manage their digital classroom.
+
+* **Course CRUD**: Create new courses or edit existing ones via sleek, slide-in modals.
+* **Assignment Deployment**: One-click assignment creation with hidden `course_id` mapping.
+* **Interactive Analytics**: Track student enrollment counts and tuition revenue at a glance.
+* **Action Tooltips**: Custom Tailwind-based hover labels for  (Assignments), (Students), and  (Settings).
+
+---
+
+## Technical Stack
+
+* **Frontend**: React.js (Functional Components & Hooks)
+* **Styling**: Tailwind CSS (Custom `rounded-[3.5rem]`, `animate-pop-in`, and `backdrop-blur`)
+* **State Management**: React `useState` / `useEffect`
+* **API Client**: Axios (with Interceptors for Authorization headers)
+* **Routing**: React Router DOM v6
+* **Backend**: Django REST Framework (Hosted on Render)
+
+---
+
+## API Architecture
+
+All requests are prefixed with `https://skilline-backend.onrender.com/api`.
+
+### **Auth Endpoints**
+
+* `POST /auth/login/` - Returns JWT tokens and user role.
+* `POST /auth/register/` - New user account creation.
+
+### **Instructor Endpoints**
+
+* `GET /students/instructor/courses/` - Fetch owned courses.
+* `POST /students/instructor/courses/{id}/assignments/create/` - Deploy new task.
+* `PATCH /students/instructor/courses/{id}/update/` - Modify course details.
+
+### **Student Endpoints**
+
+* `GET /students/courses/` - View enrolled courses.
+* `GET /students/courses/{id}/assignments/` - Fetch tasks for a specific course.
+
+
+## Design Principles
+
+* **Typography**: Heavy font weights (`font-black`) for headers to establish hierarchy.
+* **Colors**: Primary (`#2D3162`), Accent (`#4F46E5` Indigo), and Success (`#10B981` Emerald).
+* **Feedback**: High-contrast loading states and animated "empty state" illustrations.
+* **Scannability**: Horizontal rules and card-based layouts to prevent "information fatigue."
+
+---
+
+## Development Setup
+
+1. **Clone**: `git clone <repository-url>`
+2. **Install**: `npm install`
+3. **Config**: Create a `.env` file and set `RENDER_APP_API_BASE=https://skilline-backend.onrender.com/api`
+4. **Start**: `npm start`
+
+---
+
