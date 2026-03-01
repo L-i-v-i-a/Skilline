@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import AuthLayout from '../components/AuthLayout';
+import FormInput from '../components/FormInput';
+import Button from '../components/Button';
 
-const StudentRegister = () => {
+const API_BASE = 'https://skilline-backend.onrender.com/api';
+
+export default function RegisterStudent() {
   const navigate = useNavigate();
-  
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -12,138 +17,126 @@ const StudentRegister = () => {
     first_name: '',
     last_name: '',
     phone_number: '',
-    matric_number: '', // required
+    matric_number: '',
     major: '',
+    date_of_birth: '',
+    address: '',
+    bio: '',
   });
-
-  const [files, setFiles] = useState({
-    profile_image: null,
-    student_id_document: null,
-  });
-
+  const [profileImage, setProfileImage] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleFileChange = (e) => {
-    setFiles({ ...files, [e.target.name]: e.target.files[0] });
+    if (e.target.files[0]) {
+      setProfileImage(e.target.files[0]);
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
+    setSuccess('');
     setLoading(true);
 
-    const data = new FormData();
-    
-    // Append text fields
-    Object.keys(formData).forEach((key) => {
-      data.append(key, formData[key]);
-    });
+    if (formData.password !== formData.password2) {
+      setError('Passwords do not match');
+      setLoading(false);
+      return;
+    }
 
-    // Append optional file fields
-    if (files.profile_image) data.append('profile_image', files.profile_image);
-    if (files.student_id_document) data.append('student_id_document', files.student_id_document);
+    const data = new FormData();
+    Object.entries(formData).forEach(([key, value]) => {
+      if (value) data.append(key, value);
+    });
+    if (profileImage) data.append('profile_image', profileImage);
 
     try {
-      const response = await fetch('https://skilline-backend.onrender.com/api/register/student/', {
-        method: 'POST',
-        body: data,
+      await axios.post(`${API_BASE}/register/student/`, data, {
+        headers: { 'Content-Type': 'multipart/form-data' },
       });
 
-      const responseText = await response.text();
-
-      let result;
-      try {
-        result = JSON.parse(responseText);
-      } catch {
-        // Non-JSON response (e.g. 404 HTML page) — log and show simple alert
-        console.error("Server returned non-JSON response:", responseText.substring(0, 300));
-        alert("Server error or wrong endpoint. Check console for details.");
-        return;
-      }
-
-      if (response.status === 201) {
-        console.log("Success:", result);
-        alert(result.message || "Account created! Check your email for OTP.");
-        navigate('/verify-otp', { state: { email: result.email } });
-      } else {
-        console.error("Registration failed:", result);
-        alert("Registration failed. Please check your details.");
-      }
+      setSuccess('Account created! Check your email for OTP.');
+      setTimeout(() => {
+        navigate('/verify-otp', { state: { email: formData.email } });
+      }, 2200);
     } catch (err) {
-      console.error("Network / Fetch Error:", err);
-      alert("A network error occurred.");
+      const errMsg = err.response?.data?.non_field_errors?.[0] ||
+                     err.response?.data?.detail ||
+                     'Registration failed. Please check your information.';
+      setError(errMsg);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-[#f8f9fb] flex items-center justify-center py-12 px-4 font-sans">
-      <div className="max-w-4xl w-full bg-white rounded-[40px] shadow-2xl p-8 md:p-14">
-        
-        <div className="text-center mb-10">
-          <h2 className="text-4xl font-bold text-[#2F327D]">
-            Student <span className="text-[#F48C06]">Register</span>
-          </h2>
-          <p className="text-gray-500 mt-2">Create your account to join the classroom</p>
+    <AuthLayout
+      title="Student Registration"
+      subtitle="Join our learning platform as a student"
+      linkText="Already registered?"
+      linkTo="/login"
+      linkLabel="Sign in"
+    >
+      {success && (
+        <div className="bg-green-50 border-l-4 border-green-500 p-4 mb-6 rounded-r-lg text-green-700">
+          {success}
+        </div>
+      )}
+      {error && (
+        <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-6 rounded-r-lg text-red-700">
+          {error}
+        </div>
+      )}
+
+      <form onSubmit={handleSubmit} className="mt-8 space-y-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <FormInput label="First Name *" name="first_name" value={formData.first_name} onChange={handleChange} required />
+          <FormInput label="Last Name *" name="last_name" value={formData.last_name} onChange={handleChange} required />
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-5">
-            
-            {/* Left Side: Account Basics */}
-            <div className="space-y-5">
-              <input type="text" name="username" placeholder="Username *" required className="w-full px-6 py-4 rounded-2xl border border-gray-100 bg-gray-50/50 outline-none focus:border-[#F48C06] focus:bg-white transition-all" onChange={handleChange} />
-              
-              <input type="email" name="email" placeholder="Email Address" className="w-full px-6 py-4 rounded-2xl border border-gray-100 bg-gray-50/50 outline-none focus:border-[#F48C06] focus:bg-white transition-all" onChange={handleChange} />
-              
-              <input type="password" name="password" placeholder="Password *" required className="w-full px-6 py-4 rounded-2xl border border-gray-100 bg-gray-50/50 outline-none focus:border-[#F48C06] focus:bg-white transition-all" onChange={handleChange} />
-              
-              <input type="password" name="password2" placeholder="Confirm Password *" required className="w-full px-6 py-4 rounded-2xl border border-gray-100 bg-gray-50/50 outline-none focus:border-[#F48C06] focus:bg-white transition-all" onChange={handleChange} />
-            </div>
+        <FormInput label="Email *" type="email" name="email" value={formData.email} onChange={handleChange} required />
+        <FormInput label="Username *" name="username" value={formData.username} onChange={handleChange} required />
 
-            {/* Right Side: Student Details */}
-            <div className="space-y-5">
-              <div className="flex gap-4">
-                <input type="text" name="first_name" placeholder="First Name" className="w-1/2 px-6 py-4 rounded-2xl border border-gray-100 bg-gray-50/50 outline-none focus:border-[#F48C06] transition-all" onChange={handleChange} />
-                <input type="text" name="last_name" placeholder="Last Name" className="w-1/2 px-6 py-4 rounded-2xl border border-gray-100 bg-gray-50/50 outline-none focus:border-[#F48C06] transition-all" onChange={handleChange} />
-              </div>
-              
-              <input type="text" name="phone_number" placeholder="Phone Number" className="w-full px-6 py-4 rounded-2xl border border-gray-100 bg-gray-50/50 outline-none focus:border-[#F48C06] transition-all" onChange={handleChange} />
-              
-              <input type="text" name="matric_number" placeholder="Matric Number *" required className="w-full px-6 py-4 rounded-2xl border border-gray-100 bg-gray-50/50 outline-none focus:border-[#F48C06] transition-all" onChange={handleChange} />
-              
-              <input type="text" name="major" placeholder="Major (Software Engineering)" className="w-full px-6 py-4 rounded-2xl border border-gray-100 bg-gray-50/50 outline-none focus:border-[#F48C06] transition-all" onChange={handleChange} />
-            </div>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <FormInput label="Password *" type="password" name="password" value={formData.password} onChange={handleChange} required />
+          <FormInput label="Confirm Password *" type="password" name="password2" value={formData.password2} onChange={handleChange} required />
+        </div>
 
-          {/* File Upload Section */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 py-6 border-t border-gray-50">
-            <div>
-              <label className="block text-xs font-bold text-[#2F327D] mb-2 uppercase">Profile Image (Optional)</label>
-              <input type="file" name="profile_image" accept="image/*" className="text-xs text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:bg-[#F48C06]/10 file:text-[#F48C06] font-semibold cursor-pointer" onChange={handleFileChange} />
-            </div>
-            <div>
-              <label className="block text-xs font-bold text-[#2F327D] mb-2 uppercase">Student ID Document (Optional)</label>
-              <input type="file" name="student_id_document" className="text-xs text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:bg-[#2F327D]/10 file:text-[#2F327D] font-semibold cursor-pointer" onChange={handleFileChange} />
-            </div>
-          </div>
+        <FormInput
+          label="Matric / Registration Number *"
+          name="matric_number"
+          value={formData.matric_number}
+          onChange={handleChange}
+          placeholder="e.g. 2023/123456"
+          required
+        />
 
-          {/* Submit Action */}
-          <button 
-            type="submit" 
-            disabled={loading}
-            className="w-full bg-[#F48C06] text-white py-5 rounded-2xl font-bold text-xl shadow-xl shadow-orange-100 hover:bg-[#e07f05] hover:-translate-y-1 transition-all disabled:opacity-50 disabled:translate-y-0"
-          >
-            {loading ? "Processing..." : "Create Student Account"}
-          </button>
-        </form>
-      </div>
-    </div>
+        <FormInput label="Major / Course of Study" name="major" value={formData.major} onChange={handleChange} />
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Profile Photo (optional)</label>
+          <input
+            type="file"
+            accept="image/jpeg,image/png,image/webp"
+            onChange={handleFileChange}
+            className="mt-1 block w-full text-sm text-gray-500
+                       file:mr-4 file:py-2 file:px-4 file:rounded-lg
+                       file:border-0 file:text-sm file:font-semibold
+                       file:bg-blue-50 file:text-accent-blue
+                       hover:file:bg-blue-100 transition"
+          />
+        </div>
+
+        <Button type="submit" loading={loading}>
+          Create Student Account
+        </Button>
+      </form>
+    </AuthLayout>
   );
-};
-
-export default StudentRegister;
+}

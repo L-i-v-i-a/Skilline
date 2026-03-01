@@ -6,6 +6,7 @@ import PhysicalClassroom from '../components/PhysicalClassroom'
 import Features from '../components/Features'
 import TeacherToolsSection from '../components/TeacherToolsSection'
 import SkillSection from '../components/SkillSection/SkillSection'
+import AssessmentComponent from '../components/AssessmentComponent'
 
 const Home = () => {
   return (
@@ -30,6 +31,7 @@ const Home = () => {
       <PhysicalClassroom />
       <Features />
       <TeacherToolsSection />
+      <AssessmentComponent />
     </div>   
   )
 }
