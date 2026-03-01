@@ -25,6 +25,7 @@ import InstructorProfile from './pages/InstructorProfile';
 import InstructorOverview from './pages/InstructorOverview';
 import MyCourses from './pages/MyCourses';
 import SubmitAssignment from './pages/SubmitAssignment';  
+import CourseAssignments from './pages/CoursesAssignment';
 
 const Navigate = ({ to, replace }) => {
   const navigate = useNavigate();
@@ -66,6 +67,7 @@ function App() {
       <Route path="courses/create" element={<CreateCourse />} />
       <Route path="submissions" element={<InstructorSubmissions />} />
       <Route path="profile" element={<InstructorProfile />} />
+      <Route path="/instructor/courses/:courseId/assignments" element={<CourseAssignments />} />
   
       {/* 3. DEFAULT REDIRECT */}
       <Route index element={<Navigate to="/instructor/dashboard" replace />} />
