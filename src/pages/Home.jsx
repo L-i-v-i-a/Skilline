@@ -10,6 +10,7 @@ import AssessmentComponent from '../components/AssessmentComponent'
 import GradebookComponent from '../components/GradebookComponent'
 import DiscussionSection from '../components/DiscussionSection'
 import IntegrationsComponent from '../components/IntegrationsComponent'
+import TestimonialComponent from '../components/TestimonialComponent'
 
 const Home = () => {
   return (
@@ -38,6 +39,7 @@ const Home = () => {
       <GradebookComponent />
       <DiscussionSection />
       <IntegrationsComponent />
+      <TestimonialComponent />
     </div>   
   )
 }
