@@ -11,6 +11,8 @@ import GradebookComponent from '../components/GradebookComponent'
 import DiscussionSection from '../components/DiscussionSection'
 import IntegrationsComponent from '../components/IntegrationsComponent'
 import TestimonialComponent from '../components/TestimonialComponent'
+import NewsSection from '../components/NewsSection'
+import Footer from '../components/Footer'
 
 const Home = () => {
   return (
@@ -40,6 +42,8 @@ const Home = () => {
       <DiscussionSection />
       <IntegrationsComponent />
       <TestimonialComponent />
+      <NewsSection />
+      <Footer />
     </div>   
   )
 }
