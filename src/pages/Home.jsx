@@ -7,6 +7,7 @@ import Features from '../components/Features'
 import TeacherToolsSection from '../components/TeacherToolsSection'
 import SkillSection from '../components/SkillSection/SkillSection'
 import AssessmentComponent from '../components/AssessmentComponent'
+import GraphbookComponent from '../components/GraphbookComponent'
 
 const Home = () => {
   return (
@@ -32,6 +33,7 @@ const Home = () => {
       <Features />
       <TeacherToolsSection />
       <AssessmentComponent />
+      <GraphbookComponent />
     </div>   
   )
 }
